@@ -11,49 +11,40 @@
       </div>
     {% endblock heading %}
 
-    <div class="row">
+    <div class="row spawn-row">
       <div class="col-lg-7 col-md-12 mb-4">
-        <div class="card h-100">
+        <div class="card spawn-card-left">
           <div class="card-body">
-            <h4 class="card-title text-primary mb-3" style="font-size: 1.15rem; font-weight: 700;">
-              <i class="fa fa-rocket me-2"></i>Get Started
+            <h4 class="section-label">
+              <i class="fa fa-flag"></i>Get Started
             </h4>
-            <p class="card-text" style="font-size: 0.9rem; color: var(--text-secondary);">
+            <p class="section-intro">
               Piksel Sandbox adalah Jupyter Notebook berbasis komputasi-awan yang didesain untuk belajar dan bereksperimen dengan dataset dan library geospatial.
             </p>
 
-            <h5 class="mt-4 mb-3" style="font-size: 0.95rem; font-weight: 600;">Apa yang bisa Anda temukan di sini:</h5>
+            <h5 class="subsection-title">Apa yang bisa Anda temukan di sini:</h5>
             <ul class="list-group list-group-flush">
-              <li class="list-group-item d-flex align-items-start gap-3">
-                <span class="feature-icon"><i class="fa fa-bar-chart"></i></span>
-                <div>
-                  <div class="feature-title">Geospasial Data-Science Toolkit</div>
-                  <p class="feature-desc">
-                    Sandbox ini dilengkapi dengan berbagai tools penting untuk data science, seperti geopandas dan library lainnya untuk analisis data geospasial.
-                  </p>
-                </div>
+              <li class="list-group-item">
+                <div class="feature-title"><i class="fa fa-globe"></i> Geospasial Data-Science Toolkit</div>
+                <p class="feature-desc">
+                  Sandbox ini dilengkapi dengan berbagai tools penting untuk data science, seperti geopandas dan library lainnya untuk analisis data geospasial.
+                </p>
               </li>
-              <li class="list-group-item d-flex align-items-start gap-3">
-                <span class="feature-icon"><i class="fa fa-graduation-cap"></i></span>
-                <div>
-                  <div class="feature-title">Contoh untuk Belajar</div>
-                  <p class="feature-desc">
-                    Jelajahi berbagai contoh dan pelajari cara kerja dengan data geospasial.
-                  </p>
-                  <ul class="mb-0 mt-1" style="font-size: 0.82rem; color: var(--text-secondary);">
-                    <li class="mb-1">Mulai dari hal dasar, seperti loading, analisis, dan plotting data observasi bumi menggunakan Datacube.</li>
-                    <li>Eksplorasi aplikasi praktis, seperti mapping garis pantai.</li>
-                  </ul>
-                </div>
+              <li class="list-group-item">
+                <div class="feature-title"><i class="fa fa-book"></i> Contoh untuk Belajar</div>
+                <p class="feature-desc">
+                  Jelajahi berbagai contoh dan pelajari cara kerja dengan data geospasial.
+                </p>
+                <ul class="feature-list-inner">
+                  <li>Mulai dari hal dasar, seperti loading, analisis, dan plotting data observasi bumi menggunakan Datacube.</li>
+                  <li>Eksplorasi aplikasi praktis, seperti mapping garis pantai.</li>
+                </ul>
               </li>
-              <li class="list-group-item d-flex align-items-start gap-3">
-                <span class="feature-icon"><i class="fa fa-desktop"></i></span>
-                <div>
-                  <div class="feature-title">Resource yang Dijamin</div>
-                  <p class="feature-desc mb-0">
-                    Setiap user mendapat resource khusus untuk mendukung pekerjaan mereka, mulai dari 2 vCPU dan 16GB RAM.
-                  </p>
-                </div>
+              <li class="list-group-item">
+                <div class="feature-title"><i class="fa fa-server"></i> Resource yang Dijamin</div>
+                <p class="feature-desc mb-0">
+                  Setiap user mendapat resource khusus untuk mendukung pekerjaan mereka, mulai dari 2 vCPU dan 16GB RAM.
+                </p>
               </li>
             </ul>
           </div>
@@ -61,21 +52,21 @@
       </div>
 
       <div class="col-lg-5 col-md-12">
-        <div class="card">
+        <div class="card spawn-card-right">
           <div class="card-header">
-            <h4 class="card-title mb-0" style="font-size: 1rem;">
-              <i class="fa fa-cog me-2"></i>Environments
+            <h4 class="card-title mb-0" style="font-size: 0.92rem; font-weight: 600;">
+              <i class="fa fa-cubes me-2"></i>Environments
             </h4>
           </div>
-          <div class="card-body">
+          <div class="card-body d-flex flex-column spawn-right-body">
             {% if for_user and user.name != for_user.name -%}
-              <div class="alert alert-info" style="font-size: 0.85rem;">
+              <div class="alert alert-info">
                 <i class="fa fa-user me-2"></i>Spawning server for <strong>{{ for_user.name }}</strong>
               </div>
             {% endif -%}
 
             {% if error_message -%}
-              <div class="alert alert-danger" style="font-size: 0.85rem;">
+              <div class="alert alert-danger">
                 <i class="fa fa-exclamation-triangle me-2"></i>
                 <strong>Error:</strong> {{ error_message }}
               </div>
@@ -85,23 +76,67 @@
                   id="spawn_form"
                   action="{{ url | safe }}"
                   method="post"
-                  role="form">
-              {{ spawner_options_form | safe }}
-
-              <div class="mt-4 p-3 rounded contact-box" style="background: var(--bg-surface); border: 1px solid var(--border-light);">
-                <p class="mb-0">Lost in the cloud? Found a bug? Or just want to chat? We're here! Contact: <span class="fw-medium">piksel@big.go.id</span></p>
+                  role="form"
+                  class="d-flex flex-column flex-grow-1">
+              <div id="spawn-options-scroll" class="flex-grow-1">
+                {{ spawner_options_form | safe }}
+                <div id="kubespawner-profiles-list">
+                  <label class="profile">
+                    <div class="radio"><input type="radio" name="profile" value="standard" checked></div>
+                    <div>
+                      <h3>Geospatial Standard</h3>
+                      <p>Standard environment with geopandas, rasterio, and basic geospatial tools.</p>
+                    </div>
+                  </label>
+                  <label class="profile">
+                    <div class="radio"><input type="radio" name="profile" value="datacube"></div>
+                    <div>
+                      <h3>Open Data Cube</h3>
+                      <p>Includes Open Data Cube for satellite imagery analysis and time-series exploration.</p>
+                    </div>
+                  </label>
+                  <label class="profile">
+                    <div class="radio"><input type="radio" name="profile" value="deep-learning"></div>
+                    <div>
+                      <h3>Deep Learning GPU</h3>
+                      <p>TensorFlow &amp; PyTorch with GPU support for machine learning on geospatial data.</p>
+                    </div>
+                  </label>
+                  <label class="profile">
+                    <div class="radio"><input type="radio" name="profile" value="coastal"></div>
+                    <div>
+                      <h3>Coastal Mapping</h3>
+                      <p>Specialized tools for coastline analysis, shoreline detection, and coastal monitoring.</p>
+                    </div>
+                  </label>
+                  <label class="profile">
+                    <div class="radio"><input type="radio" name="profile" value="radar"></div>
+                    <div>
+                      <h3>SAR / Radar Analysis</h3>
+                      <p>Synthetic Aperture Radar processing with SNAP toolbox and Sentinel-1 data support.</p>
+                    </div>
+                  </label>
+                  <label class="profile">
+                    <div class="radio"><input type="radio" name="profile" value="minimal"></div>
+                    <div>
+                      <h3>Minimal Python</h3>
+                      <p>Lightweight environment with just Jupyter and Python essentials for quick experiments.</p>
+                    </div>
+                  </label>
+                </div>
               </div>
 
-              <div class="d-grid gap-2 mt-3">
-                <div class="feedback-container">
-                  <button type="submit" class="btn btn-primary btn-lg form-control">
-                    <i class="fa fa-play me-2"></i>Start Server
-                  </button>
-                  <div class="feedback-widget hidden text-center mt-3">
-                    <i class="fa fa-spinner fa-2x"></i>
-                    <p class="mt-2 text-muted">Starting your server...</p>
-                  </div>
-                </div>
+              <div class="scroll-fade"></div>
+              <div class="contact-box mt-auto">
+                <p class="mb-0">Any issue? Contact: <span class="fw-medium">piksel@big.go.id</span></p>
+              </div>
+
+              <button type="submit" class="btn btn-primary btn-lg form-control mt-2">
+                <i class="fa fa-play me-2"></i>Start Server
+              </button>
+              <div class="feedback-widget hidden text-center mt-2">
+                <i class="fa fa-spinner fa-2x"></i>
+                <p class="mt-2 text-muted">Starting your server...</p>
               </div>
             </form>
           </div>
@@ -121,9 +156,22 @@
 <script>
 $('form').submit(function(e) {
   var form = $(e.target);
-  form.find('.feedback-container>button').attr('disabled', true);
-  form.find('.feedback-container>*').toggleClass('hidden');
-  form.find('.feedback-widget .fa-spinner').toggleClass('fa-pulse');
+  form.find('button[type="submit"]').attr('disabled', true).addClass('hidden');
+  form.find('.feedback-widget').removeClass('hidden');
+  form.find('.feedback-widget .fa-spinner').addClass('fa-pulse');
 });
+
+function syncCardHeights() {
+  var leftCard = document.querySelector('.spawn-card-left');
+  var rightCard = document.querySelector('.spawn-card-right');
+  if (leftCard && rightCard) {
+    var h = leftCard.offsetHeight;
+    rightCard.style.setProperty('--left-card-height', h + 'px');
+    rightCard.style.maxHeight = h + 'px';
+  }
+}
+syncCardHeights();
+window.addEventListener('resize', syncCardHeights);
+new ResizeObserver(syncCardHeights).observe(document.querySelector('.spawn-card-left'));
 </script>
 {% endblock script %}

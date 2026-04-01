@@ -1,8 +1,14 @@
 .navbar {
   background-color: var(--bg) !important;
   border-bottom: 1px solid var(--border) !important;
-  padding: 0.5rem 0 !important;
+  padding: 0.6rem 0 !important;
   transition: background var(--transition), border-color var(--transition);
+}
+
+[data-theme="dark"] .navbar {
+  background-color: rgba(9, 12, 21, 0.85) !important;
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
 }
 
 .navbar .navbar-brand,
@@ -16,9 +22,9 @@
 }
 
 .jpy-logo {
-  height: 2.25rem !important;
+  height: 2rem !important;
   width: auto;
-  max-width: 160px;
+  max-width: 150px;
   object-fit: contain;
 }
 
@@ -38,40 +44,40 @@
   color: var(--text-secondary) !important;
   border-color: var(--border) !important;
   background-color: transparent !important;
-  font-size: 0.8rem;
+  font-size: 0.78rem;
   font-weight: 500;
-  padding: 0.35rem 0.85rem;
+  padding: 0.3rem 0.75rem;
   border-radius: var(--radius-sm);
   transition: all var(--transition);
+  letter-spacing: 0.01em;
 }
 
 .btn-outline-contrast:hover,
 .btn-outline-contrast:focus {
   color: #ffffff !important;
-  background-color: var(--primary) !important;
-  border-color: var(--primary) !important;
+  background-color: var(--text-primary) !important;
+  border-color: var(--text-primary) !important;
 }
 
-.btn-outline-contrast:active {
-  color: #ffffff !important;
-  background-color: var(--primary-light) !important;
-  border-color: var(--primary-light) !important;
+[data-theme="dark"] .btn-outline-contrast:hover,
+[data-theme="dark"] .btn-outline-contrast:focus {
+  background-color: var(--accent) !important;
+  border-color: var(--accent) !important;
 }
 
 .theme-toggle {
   background: none;
   border: 1px solid var(--border);
-  color: var(--text-secondary);
+  color: var(--text-tertiary);
   cursor: pointer;
-  padding: 0.35rem 0.55rem;
+  padding: 0.3rem 0.5rem;
   border-radius: var(--radius-sm);
-  font-size: 1rem;
+  font-size: 0.9rem;
   line-height: 1;
   display: inline-flex;
   align-items: center;
   justify-content: center;
   transition: all var(--transition);
-  margin-right: 0.5rem;
 }
 
 .theme-toggle:hover {
@@ -94,5 +100,6 @@
 
 #login_widget .me-1 {
   color: var(--text-secondary);
-  font-size: 0.85rem;
+  font-size: 0.82rem;
+  font-weight: 500;
 }
