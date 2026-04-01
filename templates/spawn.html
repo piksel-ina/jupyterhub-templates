@@ -6,69 +6,76 @@
 {% block main %}
   <div class="container">
     {% block heading %}
-      <div class="row text-center mb-4">
-        <h2>Selamat Datang di Piksel Sandbox</h2>
+      <div class="text-center mb-4">
+        <h2 class="spawn-heading">Selamat Datang di Piksel Sandbox</h2>
       </div>
     {% endblock heading %}
 
     <div class="row">
-      <!-- Left Column - Welcome Content -->
       <div class="col-lg-7 col-md-12 mb-4">
-        <div class="card h-100 shadow-sm">
+        <div class="card h-100">
           <div class="card-body">
-            <h4 class="card-title text-primary mb-3">
-              <i class="fa fa-rocket me-3"></i>Get Started
+            <h4 class="card-title text-primary mb-3" style="font-size: 1.15rem; font-weight: 700;">
+              <i class="fa fa-rocket me-2"></i>Get Started
             </h4>
-            <p class="card-text lead">
+            <p class="card-text" style="font-size: 0.9rem; color: var(--text-secondary);">
               Piksel Sandbox adalah Jupyter Notebook berbasis komputasi-awan yang didesain untuk belajar dan bereksperimen dengan dataset dan library geospatial.
             </p>
 
-            <h5 class="mt-4 mb-3">Apa yang bisa Anda temukan di sini:</h5>
+            <h5 class="mt-4 mb-3" style="font-size: 0.95rem; font-weight: 600;">Apa yang bisa Anda temukan di sini:</h5>
             <ul class="list-group list-group-flush">
-              <li class="list-group-item">
-                <i class="fa fa-bar-chart  text-primary me-2"></i>
-                <strong>Geospasial Data-Science Toolkit</strong>
-                <p class="ms-4 mt-2 mb-2">
-                  Sandbox ini dilengkapi dengan berbagai tools penting untuk data science, seperti geopandas dan library lainnya untuk analisis data geospasial</p>
+              <li class="list-group-item d-flex align-items-start gap-3">
+                <span class="feature-icon"><i class="fa fa-bar-chart"></i></span>
+                <div>
+                  <div class="feature-title">Geospasial Data-Science Toolkit</div>
+                  <p class="feature-desc">
+                    Sandbox ini dilengkapi dengan berbagai tools penting untuk data science, seperti geopandas dan library lainnya untuk analisis data geospasial.
+                  </p>
+                </div>
               </li>
-              <li class="list-group-item">
-                <i class="fa fa-graduation-cap text-primary me-2"></i>
-                <strong>Contoh untuk Belajar</strong>
-                <p class="ms-4 mt-2 mb-1">
-                  Jelajahi berbagai contoh dan pelajari cara kerja dengan data geospasial.
-                <ul class="mb-2">
-                  <li class="mb-2">Mulai dari hal dasar, seperti loading, analisis, dan plotting data observasi bumi menggunakan Datacube.</li>
-                  <li>Eksplorasi aplikasi praktis, seperti mapping garis pantai. </li>
-                </ul>
+              <li class="list-group-item d-flex align-items-start gap-3">
+                <span class="feature-icon"><i class="fa fa-graduation-cap"></i></span>
+                <div>
+                  <div class="feature-title">Contoh untuk Belajar</div>
+                  <p class="feature-desc">
+                    Jelajahi berbagai contoh dan pelajari cara kerja dengan data geospasial.
+                  </p>
+                  <ul class="mb-0 mt-1" style="font-size: 0.82rem; color: var(--text-secondary);">
+                    <li class="mb-1">Mulai dari hal dasar, seperti loading, analisis, dan plotting data observasi bumi menggunakan Datacube.</li>
+                    <li>Eksplorasi aplikasi praktis, seperti mapping garis pantai.</li>
+                  </ul>
+                </div>
               </li>
-              <li class="list-group-item">
-                <i class="fa fa-desktop text-primary me-2"></i>
-                <strong>Resource yang Dijamin</strong>
-                <p class="ms-4 mt-2 mb-1">
-                  Setiap user mendapat resource khusus untuk mendukung pekerjaan mereka, mulai dari 2 vCPU dan 16GB RAM.
+              <li class="list-group-item d-flex align-items-start gap-3">
+                <span class="feature-icon"><i class="fa fa-desktop"></i></span>
+                <div>
+                  <div class="feature-title">Resource yang Dijamin</div>
+                  <p class="feature-desc mb-0">
+                    Setiap user mendapat resource khusus untuk mendukung pekerjaan mereka, mulai dari 2 vCPU dan 16GB RAM.
+                  </p>
+                </div>
               </li>
             </ul>
           </div>
         </div>
       </div>
 
-      <!-- Right Column - Server Options -->
       <div class="col-lg-5 col-md-12">
-        <div class="card shadow-sm">
-          <div class="card-header bg-primary text-white">
-            <h4 class="card-title mb-0">
-              <i class="fa fa-cog me-3"></i>Environments
+        <div class="card">
+          <div class="card-header">
+            <h4 class="card-title mb-0" style="font-size: 1rem;">
+              <i class="fa fa-cog me-2"></i>Environments
             </h4>
           </div>
           <div class="card-body">
             {% if for_user and user.name != for_user.name -%}
-              <div class="alert alert-info">
+              <div class="alert alert-info" style="font-size: 0.85rem;">
                 <i class="fa fa-user me-2"></i>Spawning server for <strong>{{ for_user.name }}</strong>
               </div>
             {% endif -%}
 
             {% if error_message -%}
-              <div class="alert alert-danger">
+              <div class="alert alert-danger" style="font-size: 0.85rem;">
                 <i class="fa fa-exclamation-triangle me-2"></i>
                 <strong>Error:</strong> {{ error_message }}
               </div>
@@ -81,19 +88,17 @@
                   role="form">
               {{ spawner_options_form | safe }}
 
-              <div class="mt-4 p-3 bg-light rounded">
-                <small class="text-muted mb-0" style="display: inline-block; text-align: center;">
-                  <p class="text-center mb-0">Lost in the cloud? Found a bug? Or just want to chat? We're here! Contact: <span class="fw-medium">piksel@big.go.id</span></p>
-                </small>
+              <div class="mt-4 p-3 rounded contact-box" style="background: var(--bg-surface); border: 1px solid var(--border-light);">
+                <p class="mb-0">Lost in the cloud? Found a bug? Or just want to chat? We're here! Contact: <span class="fw-medium">piksel@big.go.id</span></p>
               </div>
 
-              <div class="d-grid gap-2">
+              <div class="d-grid gap-2 mt-3">
                 <div class="feedback-container">
                   <button type="submit" class="btn btn-primary btn-lg form-control">
                     <i class="fa fa-play me-2"></i>Start Server
                   </button>
                   <div class="feedback-widget hidden text-center mt-3">
-                    <i class="fa fa-spinner fa-2x text-primary"></i>
+                    <i class="fa fa-spinner fa-2x"></i>
                     <p class="mt-2 text-muted">Starting your server...</p>
                   </div>
                 </div>
@@ -109,14 +114,12 @@
 {% include 'css/spawn.css' %}
 </style>
 
-
 {% endblock main %}
 
 {% block script %}
 {{ super() }}
 <script>
-// setup onSubmit feedback
-$('form').submit((e) => {
+$('form').submit(function(e) {
   var form = $(e.target);
   form.find('.feedback-container>button').attr('disabled', true);
   form.find('.feedback-container>*').toggleClass('hidden');

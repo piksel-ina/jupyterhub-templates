@@ -16,6 +16,14 @@
 {% include 'css/base.css' %}
 {% include 'css/navbar.css' %}
 </style>
+<script>
+(function(){
+  var t = localStorage.getItem('theme');
+  if (t === 'dark' || (!t && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+    document.documentElement.setAttribute('data-theme', 'dark');
+  }
+})();
+</script>
 {% endblock %}
 
 {% block nav_bar %}
@@ -25,12 +33,14 @@
       {% block logo %}
         <span id="jupyterhub-logo" class="navbar-brand">
           <a href="https://sandbox.staging.piksel.big.go.id">
-            <img src='https://raw.githubusercontent.com/piksel-ina/piksel-document/5024fb9c5383bda3835e17ab7545a5fb875d70c3/assets/logo/piksel-sandbox.svg'
+            <img src='https://raw.githubusercontent.com/piksel-ina/piksel-documentation/refs/heads/main/assets/logo/piksel-sandbox.png'
               alt='Piksel logo'
-              class='jpy-logo'
-              title='Home'
-              onerror="this.style.display='none'; this.nextElementSibling.style.display='inline';" />
-              <span style="display:none;">Piksel</span>
+              class='jpy-logo jpy-logo-light'
+              title='Home' />
+            <img src='https://raw.githubusercontent.com/piksel-ina/piksel-documentation/refs/heads/main/assets/logo/piksel-sandbox-white.png'
+              alt='Piksel logo'
+              class='jpy-logo jpy-logo-dark'
+              title='Home' />
           </a>
         </span>
       {% endblock logo %}
@@ -55,7 +65,7 @@
         </ul>
         <ul class="nav navbar-nav me-2">
           {% block nav_bar_right_items %}
-            <li class="nav-item">
+            <li class="nav-item d-flex align-items-center">
               {% block login_widget %}
                 <span id="login_widget">
                   {% if user %}
@@ -75,6 +85,10 @@
             </li>
           {% endblock nav_bar_right_items %}
         </ul>
+        <button class="theme-toggle" onclick="document.documentElement.setAttribute('data-theme', document.documentElement.getAttribute('data-theme')==='dark'?'light':'dark'); localStorage.setItem('theme', document.documentElement.getAttribute('data-theme'));" title="Toggle dark mode" aria-label="Toggle dark mode">
+          <i class="fa fa-moon"></i>
+          <i class="fa fa-sun"></i>
+        </button>
       </div>
       {% block header %}
       {% endblock header %}
