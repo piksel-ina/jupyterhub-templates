@@ -1,0 +1,15 @@
+services:
+  jupyterhub:
+    build: .
+    ports:
+      - "8000:8000"
+    volumes:
+      - ./templates:/srv/jupyterhub/templates:ro
+      - ./jupyterhub_config.py:/srv/jupyterhub/jupyterhub_config.py:ro
+      - jupyterhub_data:/srv/jupyterhub/data
+    environment:
+      - JUPYTERHUB_SERVICE_PREFIX=/
+    restart: unless-stopped
+
+volumes:
+  jupyterhub_data:
