@@ -1,0 +1,44 @@
+name: Sync templates to gitops
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'dist/templates.yaml'
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+
+    steps:
+      - name: Checkout templates repo
+        uses: actions/checkout@v4
+
+      - name: Checkout gitops repo
+        uses: actions/checkout@v4
+        with:
+          repository: piksel-ina/piksel-gitops
+          token: ${{ secrets.GITOPS_PAT }}
+          path: piksel-gitops
+          ref: main
+
+      - name: Copy templates
+        run: |
+          cp dist/templates.yaml piksel-gitops/apps/base/jupyterhub/configs/templates.yaml
+
+      - name: Create Pull Request
+        uses: peter-evans/create-pull-request@v7
+        with:
+          path: piksel-gitops
+          token: ${{ secrets.GITOPS_PAT }}
+          branch: update-jupyterhub-templates
+          delete-branch: true
+          title: "Update JupyterHub templates"
+          body: |
+            Auto-generated from [jupyterhub-templates@${{ github.sha }}](https://github.com/piksel-ina/jupyterhub-templates/commit/${{ github.sha }})
+
+            Updated `apps/base/jupyterhub/configs/templates.yaml` from `dist/templates.yaml`.
+          commit-message: "update jupyterhub templates from ${{ github.sha }}"
+          labels: automated
