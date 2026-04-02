@@ -1,4 +1,4 @@
-.PHONY: up down restart logs shell rebuild
+.PHONY: up down restart logs shell rebuild dist
 
 up:
 	docker compose up --build -d
@@ -17,6 +17,9 @@ shell:
 
 rebuild:
 	docker compose up --build -d --force-recreate
+
+dist:
+	@scripts/build-dist.sh
 
 .PHONY: clean
 clean:
