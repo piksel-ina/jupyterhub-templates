@@ -28,7 +28,7 @@
 
 {% block nav_bar %}
   <div class="container">
-  <nav class="navbar navbar-expand-sm navbar-light mb-4">
+  <nav class="navbar navbar-expand navbar-light mb-4">
     <div class="container-fluid">
       {% block logo %}
         <span id="jupyterhub-logo" class="navbar-brand">
@@ -45,18 +45,7 @@
         </span>
       {% endblock logo %}
 
-      {% if user %}
-        <button class="navbar-toggler"
-                type="button"
-                data-bs-toggle="collapse"
-                data-bs-target="#thenavbar"
-                aria-controls="thenavbar"
-                aria-expanded="false"
-                aria-label="Toggle navigation">
-          <span class="navbar-toggler-icon"></span>
-        </button>
-      {% endif %}
-      <div class="collapse navbar-collapse" id="thenavbar">
+      <div class="navbar-content">
         <ul class="navbar-nav me-auto mb-0">
           {% if user %}
             {% block nav_bar_left_items %}

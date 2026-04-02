@@ -21,6 +21,47 @@
   color: var(--accent) !important;
 }
 
+.navbar-content {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 0.25rem;
+  margin-left: auto;
+}
+
+@media (max-width: 575.98px) {
+  .navbar {
+    padding: 0.4rem 0 !important;
+  }
+
+  .jpy-logo {
+    height: 1.5rem !important;
+    max-width: 110px;
+  }
+
+  .navbar-content {
+    gap: 0.15rem;
+  }
+
+  #login_widget .me-1 {
+    font-size: 0.75rem;
+  }
+
+  .btn-outline-contrast {
+    font-size: 0.72rem;
+    padding: 0.25rem 0.55rem;
+  }
+
+  .theme-toggle {
+    padding: 0.25rem 0.4rem;
+    font-size: 0.8rem;
+  }
+
+  .navbar-nav {
+    font-size: 0.82rem;
+  }
+}
+
 .jpy-logo {
   height: 2rem !important;
   width: auto;
@@ -99,7 +140,11 @@
 }
 
 #login_widget .me-1 {
-  color: var(--text-secondary);
+  color: rgba(46, 111, 186, 0.7);
   font-size: 0.82rem;
   font-weight: 500;
+}
+
+[data-theme="dark"] #login_widget .me-1 {
+  color: rgba(74, 144, 217, 0.75);
 }
